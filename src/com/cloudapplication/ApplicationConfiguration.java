@@ -123,9 +123,21 @@ public class ApplicationConfiguration
 	{
 		DataSource dataSource = new DataSource();
 	    dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-	    dataSource.setUrl("jdbc:mysql://aucxibl2dxeo01wa:hytrxvvxgrfx6e02@l9dwvv6j64hlhpul.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/n1euzrfjibaye0bl");
-	    dataSource.setUsername("aucxibl2dxeo01wa");
-	    dataSource.setPassword("hytrxvvxgrfx6e02"); 
+	    
+	    // Heroku:
+	    //dataSource.setUrl("jdbc:mysql://aucxibl2dxeo01wa:hytrxvvxgrfx6e02@l9dwvv6j64hlhpul.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/n1euzrfjibaye0bl");
+	    //dataSource.setUsername("aucxibl2dxeo01wa");
+	    //dataSource.setPassword("hytrxvvxgrfx6e02");
+	    
+	    // Azure:
+	    //dataSource.setUrl("jdbc:mysql://127.0.0.1:52017/mydatabase?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+	    //dataSource.setUsername("azure");
+	    //dataSource.setPassword("6#vWHD_$");
+	    
+	    // OpenShift:
+	    dataSource.setUrl("jdbc:mysql://mysql:3306/gcuclouddb?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+	    dataSource.setUsername("trevormoore");
+	    dataSource.setPassword("gcucloud");
 	    dataSource.setInitialSize(2);
 	    return dataSource;
 	}
