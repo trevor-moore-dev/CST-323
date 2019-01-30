@@ -135,7 +135,7 @@ public class ApplicationConfiguration
 	    //dataSource.setPassword("6#vWHD_$");
 	    
 	    // OpenShift:
-	    dataSource.setUrl("jdbc:mysql://mysql:3306/gcuclouddb?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+	    dataSource.setUrl("jdbc:mysql://172.30.76.5:3306/gcuclouddb?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 	    dataSource.setUsername("trevormoore");
 	    dataSource.setPassword("gcucloud");
 	    dataSource.setInitialSize(2);
