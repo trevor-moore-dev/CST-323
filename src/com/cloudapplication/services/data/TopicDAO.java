@@ -49,9 +49,9 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 		// defining all our queries
 		// n1euzrfjibaye0bl
 		// second query for inserting the topic into the posts table
-		String query2 = "INSERT INTO mydatabase.posts(USERID, TITLE, CATEGORY, BODY, CREATIONDATE) VALUES(?, ?, ?, ?, ?)";
+		String query2 = "INSERT INTO gcuclouddb.posts(USERID, TITLE, CATEGORY, BODY, CREATIONDATE) VALUES(?, ?, ?, ?, ?)";
 		// third query for grabbing the newly inserted post from posts table
-		String query3 = "SELECT * FROM mydatabase.posts WHERE USERID = ? AND TITLE = ? AND CATEGORY = ? AND BODY = ? AND CREATIONDATE = ?";
+		String query3 = "SELECT * FROM gcuclouddb.posts WHERE USERID = ? AND TITLE = ? AND CATEGORY = ? AND BODY = ? AND CREATIONDATE = ?";
 
 		// execute second query to insert post using user id
 		jdbcTemplate.update(query2, userid, topic.getTitle(), topic.getCategory(), topic.getBody(), topic.getDate());
@@ -77,7 +77,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	{
 		// defining our query
 		// query for grabbing all post from particular category
-		String query = "SELECT * FROM mydatabase.posts WHERE CATEGORY = ?";
+		String query = "SELECT * FROM gcuclouddb.posts WHERE CATEGORY = ?";
 		
 		// execute the query
 		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, category);
@@ -102,7 +102,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	{
 		// defining our query
 		// grabbing everything from the posts table
-		String query = "SELECT * FROM mydatabase.posts";
+		String query = "SELECT * FROM gcuclouddb.posts";
 
 		// execute query
 		SqlRowSet srs = jdbcTemplate.queryForRowSet(query);
@@ -127,7 +127,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	{
 		// defining our query
 		// grabbing the topic with the most recent date from each category
-		String query = "SELECT i1.* FROM mydatabase.posts AS i1 LEFT JOIN mydatabase.posts AS i2 ON (i1.CATEGORY = i2.CATEGORY AND i1.CREATIONDATE < i2.CREATIONDATE) WHERE i2.CREATIONDATE IS NULL";
+		String query = "SELECT i1.* FROM gcuclouddb.posts AS i1 LEFT JOIN gcuclouddb.posts AS i2 ON (i1.CATEGORY = i2.CATEGORY AND i1.CREATIONDATE < i2.CREATIONDATE) WHERE i2.CREATIONDATE IS NULL";
 
 		// execute query
 		SqlRowSet srs = jdbcTemplate.queryForRowSet(query);
@@ -153,7 +153,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	{
 		// defining our query
 		// grabbing the post of the specific id
-		String query = "SELECT * FROM mydatabase.posts WHERE ID = ?";
+		String query = "SELECT * FROM gcuclouddb.posts WHERE ID = ?";
 
 		// execute query
 		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, id);
@@ -186,7 +186,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	{
 		// defining our first query
 		// updating the row where the id equals the passed in id
-		String query1 = "UPDATE mydatabase.posts SET TITLE = ?, BODY = ? WHERE ID = ?";
+		String query1 = "UPDATE gcuclouddb.posts SET TITLE = ?, BODY = ? WHERE ID = ?";
 		
 		// execute the update
 		jdbcTemplate.update(query1, topic.getTitle(), 
@@ -195,7 +195,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 		
 		// defining our second query
 		// grab the newly updated row based off of the id
-		String query2 = "SELECT * FROM mydatabase.posts WHERE ID = ?";
+		String query2 = "SELECT * FROM gcuclouddb.posts WHERE ID = ?";
 
 		// execute the second query
 		SqlRowSet srs = jdbcTemplate.queryForRowSet(query2, topic.getId());
@@ -227,7 +227,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	{
 		// defining our query
 		// delete the posts table based off passed in id
-		String query = "DELETE FROM mydatabase.posts WHERE ID = ?";
+		String query = "DELETE FROM gcuclouddb.posts WHERE ID = ?";
 
 		// execute the delete
 		jdbcTemplate.update(query, topic.getId());
@@ -244,7 +244,7 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	public void addComment(CommentModel comment, String date, String postid, String userid)
 	{
 		// query for inserting a new comment
-		String query1 = "INSERT INTO mydatabase.comments(UID, PID, COMMENTBODY, CREATIONDATE) VALUES(?, ?, ?, ?)";
+		String query1 = "INSERT INTO gcuclouddb.comments(UID, PID, COMMENTBODY, CREATIONDATE) VALUES(?, ?, ?, ?)";
 		
 		// execute first query to insert comment
 		jdbcTemplate.update(query1, userid, postid, comment.getComment(), date);
@@ -259,10 +259,10 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 	public List<CommentModel> getComments(String postid)
 	{
 		// query for grabbing all comments for a particular post
-		String query = "SELECT mydatabase.comments.ID, mydatabase.comments.UID, mydatabase.comments.PID, mydatabase.comments.COMMENTBODY, mydatabase.comments.CREATIONDATE, mydatabase.users.USERNAME " + 
-		"FROM mydatabase.comments INNER JOIN mydatabase.users " +
-		"ON mydatabase.comments.UID = mydatabase.users.ID " + 
-		"WHERE mydatabase.comments.PID = ? " +
+		String query = "SELECT gcuclouddb.comments.ID, gcuclouddb.comments.UID, gcuclouddb.comments.PID, gcuclouddb.comments.COMMENTBODY, gcuclouddb.comments.CREATIONDATE, gcuclouddb.users.USERNAME " + 
+		"FROM gcuclouddb.comments INNER JOIN gcuclouddb.users " +
+		"ON gcuclouddb.comments.UID = gcuclouddb.users.ID " + 
+		"WHERE gcuclouddb.comments.PID = ? " +
 		"ORDER BY CREATIONDATE DESC";
 		
 		// executing the query
