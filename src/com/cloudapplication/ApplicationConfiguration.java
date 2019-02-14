@@ -141,8 +141,9 @@ public class ApplicationConfiguration
 		
 		// GoogleCloud:
 		//dataSource.setUrl("jdbc:mysql://35.227.174.244:3306/googlegcuclouddb");
-	    dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false");
+	    //dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false");
 		//dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=trevormoore&password=trevormoore");
+		dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?socketFactory=com.google.cloud.sql.mysql.SocketFactory&cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud");
 		dataSource.setUsername("trevormoore");
 	    dataSource.setPassword("trevormoore");
 	    dataSource.setInitialSize(1);
