@@ -49,9 +49,9 @@ public class TopicDAO extends DataAccessInterface<TopicModel,CommentModel>
 		// defining all our queries
 		// n1euzrfjibaye0bl
 		// second query for inserting the topic into the posts table
-		String query2 = "INSERT INTO googlegooglegcuclouddb.posts(USERID, TITLE, CATEGORY, BODY, CREATIONDATE) VALUES(?, ?, ?, ?, ?)";
+		String query2 = "INSERT INTO googlegcuclouddb.posts(USERID, TITLE, CATEGORY, BODY, CREATIONDATE) VALUES(?, ?, ?, ?, ?)";
 		// third query for grabbing the newly inserted post from posts table
-		String query3 = "SELECT * FROM googlegooglegcuclouddb.posts WHERE USERID = ? AND TITLE = ? AND CATEGORY = ? AND BODY = ? AND CREATIONDATE = ?";
+		String query3 = "SELECT * FROM googlegcuclouddb.posts WHERE USERID = ? AND TITLE = ? AND CATEGORY = ? AND BODY = ? AND CREATIONDATE = ?";
 
 		// execute second query to insert post using user id
 		jdbcTemplate.update(query2, userid, topic.getTitle(), topic.getCategory(), topic.getBody(), topic.getDate());
