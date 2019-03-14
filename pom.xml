@@ -6,8 +6,49 @@
   <artifactId>SocialNorm</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <!-- <build>
+  <build>
     <sourceDirectory>src</sourceDirectory>
+    <finalName>${warname}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+ 	    <configuration>
+	    	<warSourceDirectory>${project.basedir}/target/${warname}</warSourceDirectory>
+ 	    </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+    	<resource>
+             <directory>src/main/java</directory>
+             <excludes>
+                <exclude>**/*.java</exclude>
+                <exclude>**/config.properties</exclude> 
+                <exclude>**/web.xml</exclude>
+                <exclude>**/log4j.xml</exclude>
+              </excludes>
+      	</resource>
+      	<resource>
+             <directory>WebContent</directory>
+             <targetPath>${project.basedir}/target/${warname}</targetPath>
+             <includes>
+                <include>**/WEB-INF/layouts/**</include>
+                <include>**/WEB-INF/pages/**</include>
+                <include>**/WEB-INF/applicationConfiguration.xml</include>
+              </includes>
+     	</resource>
+     </resources>
+  </build>
+  <!-- <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -31,8 +72,8 @@
 </plugin>
     </plugins>
   </build>-->
-  <!-- Build Rules -->
   
+  <!-- Build Rules -->
   <properties>
   <warname>SocialNorm</warname>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -45,122 +86,50 @@
 	</properties>
   
   <!-- Cloud Platform Profile configurations -->
-	  <profiles>
-	      <profile>
-	         <id>dev</id>
-	         <activation>
-	            <activeByDefault>true</activeByDefault>
-	         </activation>
-	         <properties>
-	             <build.profile.id>dev</build.profile.id>
-	         </properties>
-	         <build>
-	           <resources>
-	             <resource>
-	               <directory>src/config/dev</directory>
-	               <includes>
-	                 <include>config.properties</include>
-	               </includes>
-	               <targetPath>config</targetPath>
-	             </resource>
-	             <resource>
-	               <directory>src/config/dev</directory>
-	               <includes>
-	                 <include>web.xml</include>
-	               </includes>
-	               <targetPath>${project.basedir}/target/${warname}/WEB-INF</targetPath>
-	             </resource>
-	            <resource>
-	               <directory>src/config/dev</directory>
-	               <includes>
-	                 <include>log4j.xml</include>
-	               </includes>
-	               <targetPath>../${warname}/WEB-INF/classes</targetPath>
-	             </resource>
-	           </resources>
-	         </build>
-	     </profile>
-	      <profile>
-	         <id>heroku</id>
-	         <activation>
-	            <activeByDefault>true</activeByDefault>
-	         </activation>
-	         <properties>
-	             <build.profile.id>heroku</build.profile.id>
-	         </properties>
-	         <build>
-	           <resources>
-	             <resource>
-	               <directory>src/config/heroku</directory>
-	               <includes>
-	                 <include>config.properties</include>
-	               </includes>
-	               <targetPath>config</targetPath>
-	             </resource>
-	             <resource>
-	               <directory>src/config/heroku</directory>
-	               <includes>
-	                 <include>web.xml</include>
-	               </includes>
-	               <targetPath>${project.basedir}/target/${warname}/WEB-INF</targetPath>
-	             </resource>
-	            <resource>
-	               <directory>src/config/heroku</directory>
-	               <includes>
-	                 <include>log4j.xml</include>
-	               </includes>
-	               <targetPath>../${warname}/WEB-INF/classes</targetPath>
-	             </resource>
-	           </resources>
-	         </build>
-	     </profile>
-	  </profiles>
-  <build>
-    <!-- <sourceDirectory>src</sourceDirectory>-->
-    <finalName>${warname}</finalName>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.0.0</version>
- 	    <configuration>
-	    	<warSourceDirectory>${project.basedir}/target/${warname}</warSourceDirectory>
- 	    </configuration>
-      </plugin>
-      <plugin>
-   <groupId>com.google.cloud.tools</groupId>
-   <artifactId>appengine-maven-plugin</artifactId>
-   <version>1.3.2</version>
-</plugin>
-    </plugins>
-    <resources>
-    	<resource>
-             <directory>config</directory>
-             <excludes>
-                <exclude>**/*.java</exclude>
-                <exclude>**/config.properties</exclude> 
-                <exclude>**/web.xml</exclude>
-                <exclude>**/log4j.xml</exclude>
-              </excludes>
-      	</resource>
-      	<resource>
-             <directory>WebContent</directory>
-             <targetPath>${project.basedir}/target/${warname}</targetPath>
-             <includes>
-                <include>**/WEB-INF/layouts/**</include>
-                <include>**/WEB-INF/pages/**</include>
-                <include>**/WEB-INF/applicationConfiguration.xml</include>
-              </includes>
-     	</resource>
-     </resources>
-  </build>
+  <profiles>
+      <profile>
+         <id>dev</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <properties>
+             <build.profile.id>dev</build.profile.id>
+         </properties>
+         <build>
+           <resources>
+           <resource>
+               <directory>src/config/dev</directory>
+               <includes>
+                 <include>config.properties</include>
+               </includes>
+               <targetPath>config</targetPath>
+             </resource>
+             <resource>
+               <directory>src/config/dev</directory>
+               <includes>
+                 <include>web.xml</include>
+               </includes>
+               <targetPath>${project.basedir}/target/${warname}/WEB-INF</targetPath>
+             </resource>
+            <resource>
+               <directory>src/config/dev</directory>
+               <includes>
+                 <include>log4j.xml</include>
+               </includes>
+               <targetPath>../${warname}/WEB-INF/classes</targetPath>
+             </resource>
+             <resource>
+               <directory>src/config/dev</directory>
+               <includes>
+                 <include>appengine-web.xml</include>
+               </includes>
+               <targetPath>../${warname}/WEB-INF</targetPath>
+             </resource>
+           </resources>
+         </build>
+     </profile>
+  </profiles>
+
    <!-- Dependencies -->
   <dependencies>
   <dependency>
