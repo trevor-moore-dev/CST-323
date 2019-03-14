@@ -122,7 +122,7 @@ public class ApplicationConfiguration
 	public DataSource getDataSource()
 	{
 		DataSource dataSource = new DataSource();
-	    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+	    dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 	    
 	    // Heroku:
 	    //dataSource.setUrl("jdbc:mysql://aucxibl2dxeo01wa:hytrxvvxgrfx6e02@l9dwvv6j64hlhpul.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/n1euzrfjibaye0bl");
