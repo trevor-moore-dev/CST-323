@@ -57,21 +57,21 @@
 	         <build>
 	           <resources>
 	             <resource>
-	               <directory>config/dev</directory>
+	               <directory>src/config/dev</directory>
 	               <includes>
 	                 <include>config.properties</include>
 	               </includes>
 	               <targetPath>config</targetPath>
 	             </resource>
 	             <resource>
-	               <directory>config/dev</directory>
+	               <directory>src/config/dev</directory>
 	               <includes>
 	                 <include>web.xml</include>
 	               </includes>
 	               <targetPath>${project.basedir}/target/${warname}/WEB-INF</targetPath>
 	             </resource>
 	            <resource>
-	               <directory>config/dev</directory>
+	               <directory>src/config/dev</directory>
 	               <includes>
 	                 <include>log4j.xml</include>
 	               </includes>
@@ -91,21 +91,21 @@
 	         <build>
 	           <resources>
 	             <resource>
-	               <directory>config/heroku</directory>
+	               <directory>src/config/heroku</directory>
 	               <includes>
 	                 <include>config.properties</include>
 	               </includes>
 	               <targetPath>config</targetPath>
 	             </resource>
 	             <resource>
-	               <directory>config/heroku</directory>
+	               <directory>src/config/heroku</directory>
 	               <includes>
 	                 <include>web.xml</include>
 	               </includes>
 	               <targetPath>${project.basedir}/target/${warname}/WEB-INF</targetPath>
 	             </resource>
 	            <resource>
-	               <directory>config/heroku</directory>
+	               <directory>src/config/heroku</directory>
 	               <includes>
 	                 <include>log4j.xml</include>
 	               </includes>
@@ -116,7 +116,7 @@
 	     </profile>
 	  </profiles>
   <build>
-    <sourceDirectory>src</sourceDirectory>
+    <!-- <sourceDirectory>src</sourceDirectory>-->
     <finalName>${warname}</finalName>
     <plugins>
       <plugin>
