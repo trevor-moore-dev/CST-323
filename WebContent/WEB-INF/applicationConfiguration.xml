@@ -10,13 +10,15 @@ https://www.tutorialspoint.com/spring/spring_exception_handling_example.htm
 
 For figuring out how to map to js and css files in the resources directory, and how to implement a global exception handler
 -->
-
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd       
     http://www.springframework.org/schema/context
@@ -52,5 +54,50 @@ For figuring out how to map to js and css files in the resources directory, and 
 	 <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <mvc:annotation-driven />
+    
+    <!-- Configuration Parameters -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:config/config.properties"/>
+    </bean>  
    
-  </beans>
+   <!-- Intercepter -->
+    <aop:aspectj-autoproxy/>
+    <bean id="tracer" class="com.cloudapplication.services.utility.Tracer"> </bean>
+    <aop:config>
+        <aop:pointcut id="businessServices" expression="execution(* com.cloudapplication.services.business..*(..))"/>
+        <aop:aspect id="aroundBusiness" ref="tracer">
+            <aop:around pointcut-ref="businessServices" method="doBasicProfiling"/>
+        </aop:aspect>
+    </aop:config>
+    <aop:config>
+        <aop:pointcut id="dataServices" expression="execution(* com.cloudapplication.services.data..*(..))"/>
+        <aop:aspect id="aroundData" ref="tracer">
+            <aop:around pointcut-ref="dataServices" method="doBasicProfiling"/>
+        </aop:aspect>
+    </aop:config>
+    <aop:config>
+        <aop:pointcut id="controllerServices" expression="execution(* com.cloudapplication.controller..*(..))"/>
+        <aop:aspect id="aroundController" ref="tracer">
+            <aop:around pointcut-ref="controllerServices" method="doBasicProfiling"/>
+        </aop:aspect>
+    </aop:config>
+    <aop:config>
+        <aop:pointcut id="businessPointcut" expression="within(com.cloudapplication.services.business..*)"/>
+        <aop:aspect id="withinBusiness" ref="tracer">
+            <aop:before pointcut-ref="businessPointcut" method="inBusinessServiceLayer"/>
+        </aop:aspect>
+    </aop:config>
+    <aop:config>
+        <aop:pointcut id="dataPointcut" expression="within(com.cloudapplication.services.data..*)"/>
+        <aop:aspect id="withinData" ref="tracer">
+            <aop:before pointcut-ref="dataPointcut" method="inDataServiceLayer"/>
+        </aop:aspect>
+    </aop:config>
+    <aop:config>
+        <aop:pointcut id="controllerPointcut" expression="within(com.cloudapplication.controller..*)"/>
+        <aop:aspect id="withinController" ref="tracer">
+            <aop:before pointcut-ref="controllerPointcut" method="inControllerLayer"/>
+        </aop:aspect>
+    </aop:config>
+   
+</beans>

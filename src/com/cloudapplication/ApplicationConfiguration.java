@@ -122,7 +122,7 @@ public class ApplicationConfiguration
 	public DataSource getDataSource()
 	{
 		DataSource dataSource = new DataSource();
-	    dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+	    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 	    
 	    // Heroku:
 	    //dataSource.setUrl("jdbc:mysql://aucxibl2dxeo01wa:hytrxvvxgrfx6e02@l9dwvv6j64hlhpul.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/n1euzrfjibaye0bl");
@@ -135,18 +135,24 @@ public class ApplicationConfiguration
 	    //dataSource.setPassword("6#vWHD_$");
 	    
 	    // OpenShift:
-	    //dataSource.setUrl("jdbc:mysql://172.30.76.5:3306/gcuclouddb");
+	    dataSource.setUrl("jdbc:mysql://172.30.76.5:3306/gcuclouddb");
+	    dataSource.setUsername("trevormoore");
+	    dataSource.setPassword("gcucloud");
+	    
+	    // AWS
+	    //dataSource.setUrl("jdbc:mysql://mygcuclouddbinstance.craihqdakq1j.us-east-2.rds.amazonaws.com:3306/gcuclouddb");
 	    //dataSource.setUsername("trevormoore");
 	    //dataSource.setPassword("gcucloud");
-		
-		// GoogleCloud:
-		//dataSource.setUrl("jdbc:mysql://35.227.174.244:3306/googlegcuclouddb");
-	    //dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false");
-		//dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=trevormoore&password=trevormoore");
-		dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?socketFactory=com.google.cloud.sql.mysql.SocketFactory&cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud");
-		dataSource.setUsername("trevormoore");
-	    dataSource.setPassword("trevormoore");
-	    dataSource.setInitialSize(1);
+	    
+	    // GoogleCloud:
+	    //dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?socketFactory=com.google.cloud.sql.mysql.SocketFactory&cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud");
+	    //dataSource.setUsername("trevormoore");
+	    //dataSource.setPassword("trevormoore");
+		//test dataSource.setUrl("jdbc:mysql://35.227.174.244:3306/googlegcuclouddb");
+		//test dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false");
+		//test dataSource.setUrl("jdbc:mysql://google/googlegcuclouddb?cloudSqlInstance=axial-iris-231514:us-west1:googlegcucloud&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=trevormoore&password=trevormoore");
+
+	    dataSource.setInitialSize(2);
 	    return dataSource;
 	}
 	
