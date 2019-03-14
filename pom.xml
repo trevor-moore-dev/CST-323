@@ -32,48 +32,9 @@
     </plugins>
   </build>-->
   <!-- Build Rules -->
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <finalName>${warname}</finalName>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.0.0</version>
- 	    <configuration>
-	    	<warSourceDirectory>${project.basedir}/target/${warname}</warSourceDirectory>
- 	    </configuration>
-      </plugin>
-    </plugins>
-    <resources>
-    	<resource>
-             <directory>config</directory>
-             <excludes>
-                <exclude>**/*.java</exclude>
-                <exclude>**/config.properties</exclude> 
-                <exclude>**/web.xml</exclude>
-                <exclude>**/log4j.xml</exclude>
-              </excludes>
-      	</resource>
-      	<resource>
-             <directory>WebContent</directory>
-             <targetPath>${project.basedir}/target/${warname}</targetPath>
-             <includes>
-                <include>**/WEB-INF/layouts/**</include>
-                <include>**/WEB-INF/pages/**</include>
-                <include>**/WEB-INF/applicationConfiguration.xml</include>
-              </includes>
-     	</resource>
-     </resources>
-  </build>
+  
   <properties>
+  <warname>SocialNorm</warname>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.3.2.RELEASE</spring.version>
 		<junit.version>4.12</junit.version>
@@ -154,7 +115,47 @@
 	         </build>
 	     </profile>
 	  </profiles>
-  
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <finalName>${warname}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+ 	    <configuration>
+	    	<warSourceDirectory>${project.basedir}/target/${warname}</warSourceDirectory>
+ 	    </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+    	<resource>
+             <directory>config</directory>
+             <excludes>
+                <exclude>**/*.java</exclude>
+                <exclude>**/config.properties</exclude> 
+                <exclude>**/web.xml</exclude>
+                <exclude>**/log4j.xml</exclude>
+              </excludes>
+      	</resource>
+      	<resource>
+             <directory>WebContent</directory>
+             <targetPath>${project.basedir}/target/${warname}</targetPath>
+             <includes>
+                <include>**/WEB-INF/layouts/**</include>
+                <include>**/WEB-INF/pages/**</include>
+                <include>**/WEB-INF/applicationConfiguration.xml</include>
+              </includes>
+     	</resource>
+     </resources>
+  </build>
    <!-- Dependencies -->
   <dependencies>
   <dependency>
